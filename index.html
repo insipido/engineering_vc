@@ -2,103 +2,218 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Victor Engineering</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Victor Engineering | Technical Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      /* Palette based on "Machine Oil Blue" and "Sunny Yellow" [2, 1] */
+      --bg-dark: #0f141a;
+      --bg-panel: #1e2a36;
+      --accent-yellow: #f2a900;
+      --text-main: #d8dde1;
+      --text-dim: #7a8c98;
+      --grid-color: rgba(255, 255, 255, 0.05);
+      --border-color: #3c5366;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
-      font-family: Arial, sans-serif;
-      max-width: 1000px; /* Increased to accommodate two columns comfortably */
-      margin: 40px auto;
+      background-color: var(--bg-dark);
+      /* Technical Blueprint Grid background  */
+      background-image: 
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      background-size: 40px 40px;
+      color: var(--text-main);
+      font-family: 'Space Grotesk', sans-serif;
+      margin: 0;
+      padding: 0;
       line-height: 1.6;
-      padding: 0 20px;
     }
 
     header {
-      margin-bottom: 40px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 20px;
+      padding: 60px 20px;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(15, 20, 26, 0.8);
+      backdrop-filter: blur(5px);
+      text-align: center;
     }
 
-    /* Flexbox container to align main content and sidebar */
-    .container {
+    h1 {
+      margin: 0;
+      font-size: 3rem;
+      letter-spacing: -2px;
+      color: var(--accent-yellow);
+      text-transform: uppercase;
+    }
+
+   .subtitle {
+      color: var(--text-dim);
+      font-weight: 300;
+      margin-top: 5px;
+    }
+
+   .container {
       display: flex;
-      gap: 40px; /* Gap between the two columns */
+      max-width: 1200px;
+      margin: 40px auto;
+      gap: 40px;
+      padding: 0 20px;
     }
 
-    /* Main content column taking up 70% of the width */
-    .main-content {
-      flex: 7;
+   .main-content { flex: 7; }
+   .sidebar { flex: 3; }
+
+    /* CAD-Style Corner Frames for Project Cards [4, 6] */
+   .tech-card {
+      position: relative;
+      background: var(--bg-panel);
+      padding: 30px;
+      margin-bottom: 40px;
+      border: 1px solid transparent;
     }
 
-    /* Sidebar column taking up 30% of the width */
-    .sidebar {
-      flex: 3;
-      background-color: #f9f9f9;
+    /* Brackets logic  */
+   .tech-card::before,.tech-card::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-color: var(--accent-yellow);
+      border-style: solid;
+      pointer-events: none;
+    }
+   .tech-card::before { top: -2px; left: -2px; border-width: 2px 0 0 2px; }
+   .tech-card::after { bottom: -2px; right: -2px; border-width: 0 2px 2px 0; }
+
+   .card-label {
+      font-size: 0.7rem;
+      color: var(--accent-yellow);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      display: block;
+      /* Dashed technical line  */
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 5px;
+    }
+
+   .project-image-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #151a21;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    h2 { color: var(--accent-yellow); margin-top: 0; }
+
+    /* Sidebar Styling */
+   .sidebar-section {
+      background: rgba(30, 42, 54, 0.5);
+      border: 1px solid var(--border-color);
       padding: 20px;
-      border-radius: 5px;
-      align-self: flex-start; /* Prevents sidebar from stretching vertically */
+      margin-bottom: 20px;
     }
 
-    h2 {
-      margin-top: 0;
+   .sidebar h2 { font-size: 1.2rem; border-bottom: 1px solid var(--accent-yellow); padding-bottom: 5px; }
+
+    ul { list-style: none; padding: 0; }
+    li { margin-bottom: 12px; }
+
+    a {
+      color: var(--text-main);
+      text-decoration: none;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+    }
+    a:hover { color: var(--accent-yellow); }
+    a::before { content: "› "; margin-right: 8px; color: var(--accent-yellow); }
+
+    /* Status Label styling [8] */
+   .status-badge {
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      border-radius: 2px;
+      background: var(--border-color);
+      color: white;
+      margin-left: 10px;
     }
 
-    ul {
-      padding-left: 20px;
-    }
-
-    /* Responsive design for smaller screens */
     @media (max-width: 768px) {
-      .container {
-        flex-direction: column; /* Stacks columns vertically on mobile */
-      }
-      .sidebar {
-        order: -1; /* Optional: moves sidebar to the top on mobile */
-      }
+     .container { flex-direction: column; }
+     .sidebar { order: 2; }
     }
   </style>
 </head>
 <body>
 
   <header>
+    <div class="card-label" style="max-width: 1200px; margin: 0 auto 10px;">System Status: Online // Port: 8080</div>
     <h1>Victor Engineering</h1>
-    <p>Independent engineering and drafting services.</p>
+    <div class="subtitle">Independent Drafting & Solution Architecture</div>
   </header>
 
   <div class="container">
-    
-    <!-- Main Content Area -->
     <main class="main-content">
-      <article>
-        <h2>Current Work</h2>
-        <p>Project summaries and examples will go here.</p>
+      
+      <article class="tech-card">
+        <span class="card-label">Case Study // 001</span>
+        <h2>Current Project: Automated Structural Analysis</h2>
+        <div class="project-image-placeholder">
+         
+        </div>
+        <p>Implementation of high-precision stress testing for modular frameworks. Focus on reducing iteration cycles through rapid prototyping and direct inspection.</p>
+        <div class="card-label" style="border-bottom:none; border-top: 1px dashed var(--border-color); padding-top:10px;">
+          Tools: AutoCAD, C++, Python
+        </div>
       </article>
 
-      <article>
-        <h2>Previous Work</h2>
-        <p>Project summaries and examples will go here.</p>
+      <article class="tech-card">
+        <span class="card-label">Archive // 002</span>
+        <h2>Previous Work: Mechanical Drafting</h2>
+        <div class="project-image-placeholder">
+         
+        </div>
+        <p>Comprehensive drafting for industrial HVAC components, optimized for manufacturing reliability and audit-ready documentation.</p>
       </article>
 
-      <section>
-        <h2>Contact</h2>
+      <section class="tech-card" style="background: transparent; border: 1px dashed var(--border-color);">
+        <span class="card-label">Terminal // Contact</span>
+        <h2>Reach Out</h2>
         <p>Email: engineering_vc@outlook.com</p>
       </section>
     </main>
 
-    <!-- Sidebar Area -->
     <aside class="sidebar">
-      <h2>Tools</h2>
-      <ul>
-        <li><a href="#">Beam calculator (coming soon)</a></li>
-        <li><a href="tools.html">Engineering Tools</a></li>
-      </ul>
+      <div class="sidebar-section">
+        <h2>Engineering Tools</h2>
+        <ul>
+          <li><a href="#">Beam Calculator <span class="status-badge">BETA</span></a></li>
+          <li><a href="#">Drafting Presets</a></li>
+          <li><a href="#">Unit Converter</a></li>
+        </ul>
+      </div>
 
-      <h2>Blog Section</h2>
-      <ul>
-        <li><a href="#">Latest Project Updates</a></li>
-        <li><a href="#">Drafting Tips & Tricks</a></li>
-      </ul>
+      <div class="sidebar-section">
+        <h2>Technical Log</h2>
+        <ul>
+          <li><a href="#">2025 Design Trends</a></li>
+          <li><a href="#">CAD Automation Tips</a></li>
+          <li><a href="#">Version Control for Specs</a></li>
+        </ul>
+      </div>
     </aside>
-
   </div>
 
 </body>
