@@ -6,29 +6,100 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      max-width: 800px;
+      max-width: 1000px; /* Increased to accommodate two columns comfortably */
       margin: 40px auto;
       line-height: 1.6;
+      padding: 0 20px;
+    }
+
+    header {
+      margin-bottom: 40px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
+    }
+
+    /* Flexbox container to align main content and sidebar */
+    .container {
+      display: flex;
+      gap: 40px; /* Gap between the two columns */
+    }
+
+    /* Main content column taking up 70% of the width */
+    .main-content {
+      flex: 7;
+    }
+
+    /* Sidebar column taking up 30% of the width */
+    .sidebar {
+      flex: 3;
+      background-color: #f9f9f9;
+      padding: 20px;
+      border-radius: 5px;
+      align-self: flex-start; /* Prevents sidebar from stretching vertically */
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    /* Responsive design for smaller screens */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column; /* Stacks columns vertically on mobile */
+      }
+      .sidebar {
+        order: -1; /* Optional: moves sidebar to the top on mobile */
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Victor Engineering</h1>
-  <p>Independent engineering and drafting services.</p>
 
-  <h2>Tools</h2>
-  <ul>
-    <li><a href="#">Beam calculator (coming soon)</a></li>
-    <li><a href="tools.html">Engineering Tools</a></li>
-  </ul>
+  <header>
+    <h1>Victor Engineering</h1>
+    <p>Independent engineering and drafting services.</p>
+  </header>
 
-<h2>Current Work</h2>
-  <p>Project summaries and examples will go here.</p>
+  <div class="container">
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <article>
+        <h2>Current Work</h2>
+        <p>Project summaries and examples will go here.</p>
+      </article>
 
-  <h2>Previous Work</h2>
-  <p>Project summaries and examples will go here.</p>
+      <article>
+        <h2>Previous Work</h2>
+        <p>Project summaries and examples will go here.</p>
+      </article>
 
-  <h2>Contact</h2>
-  <p>Email: engineering_vc@outlook.com</p>
+      <section>
+        <h2>Contact</h2>
+        <p>Email: engineering_vc@outlook.com</p>
+      </section>
+    </main>
+
+    <!-- Sidebar Area -->
+    <aside class="sidebar">
+      <h2>Tools</h2>
+      <ul>
+        <li><a href="#">Beam calculator (coming soon)</a></li>
+        <li><a href="tools.html">Engineering Tools</a></li>
+      </ul>
+
+      <h2>Blog Section</h2>
+      <ul>
+        <li><a href="#">Latest Project Updates</a></li>
+        <li><a href="#">Drafting Tips & Tricks</a></li>
+      </ul>
+    </aside>
+
+  </div>
+
 </body>
 </html>
